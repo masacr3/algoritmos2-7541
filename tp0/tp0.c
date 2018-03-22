@@ -1,3 +1,14 @@
+/*
+ * Alumno: Leonel Rodrigo Rolon
+ * Padron: 101009
+ * fecha: 22-marzo-2018
+ * code: C
+ * Ejercicio: swap, maximo, comparar, seleccion
+ *
+ * Facultad de Ingenieria, Universidad de Buenos Aires
+ * Algoritmos II 75.41
+ * */
+
 #include "tp0.h"
 
 /* ******************************************************************
