@@ -26,17 +26,17 @@ bool vector_guardar(vector_t* vector, size_t pos, int valor){
   return pos >= vector->tam ? false : _guardar_dato(vector,pos,valor);
 }
 
-bool vector_obtener(vector_t vector, size_t pos, int* valor){
+bool vector_obtener(vector_t* vector, size_t pos, int* valor){
   return pos >= vector->tam ? false : _obtener_dato(vector,pos,valor);
 }
 // ...
 
-bool _guardar_dato(vector_t vector, size_t pos, int valor){
+bool _guardar_dato(vector_t* vector, size_t pos, int valor){
   vector->datos[pos] = valor;
   return true;
 }
 
-bool _obtener_dato(vector_t vector, size_t pos, int* valor){
+bool _obtener_dato(vector_t* vector, size_t pos, int* valor){
   *valor = vector->datos[pos];
   return true;
 }

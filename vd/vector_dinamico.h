@@ -54,11 +54,11 @@ size_t vector_obtener_tamanio(vector_t* vector); //ok
 //Funcion privada de vector_obtener
 //Pre: el vector fue creado
 //Post: se almacenó en valor el dato en la posición pos. Devuelve true
-bool _obtener_dato(vector_t vector, size_t pos, int* valor);
+bool _obtener_dato(vector_t* vector, size_t pos, int* valor);
 
 //Funcion privada de vector_guardar
 //Pre: el vector fue creado
 //Post: se almacenó el valor en la posición pos. Devuelve true
-bool _guardar_dato(vector_t vector, size_t pos, int valor);
+bool _guardar_dato(vector_t* vector, size_t pos, int valor);
 
 #endif // VECTOR_DINAMICO_H
