@@ -13,6 +13,27 @@
 
 
 // Funciones del alumno.
+
+
+//Funcion privada de vector_guardar
+//Pre: el vector fue creado
+//pos es una posicion valida del vector
+//Post: se almacenó el valor en la posición pos. Devuelve true
+bool _guardar_dato(vector_t* vector, size_t pos, int valor){
+  vector->datos[pos] = valor;
+  return true;
+}
+
+//Funcion privada de vector_obtener
+//Pre: el vector fue creado
+//pos es una posicion valida del vector
+//Post: se almacenó en valor el dato de la posición pos. Devuelve true
+bool _obtener_dato(vector_t* vector, size_t pos, int* valor){
+  *valor = vector->datos[pos];
+  return true;
+}
+
+
 size_t vector_obtener_tamanio(vector_t* vector){
   return vector->tam;
 }
@@ -30,16 +51,6 @@ bool vector_obtener(vector_t* vector, size_t pos, int* valor){
   return pos >= vector->tam ? false : _obtener_dato(vector,pos,valor);
 }
 // ...
-
-bool _guardar_dato(vector_t* vector, size_t pos, int valor){
-  vector->datos[pos] = valor;
-  return true;
-}
-
-bool _obtener_dato(vector_t* vector, size_t pos, int* valor){
-  *valor = vector->datos[pos];
-  return true;
-}
 
 // Funciones implementadas por la catedra.
 
