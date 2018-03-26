@@ -1,3 +1,14 @@
+/*
+ * Alumno: Leonel Rodrigo Rolon
+ * Padron: 101009
+ * fecha: 22-marzo-2018
+ * code: C
+ * Ejercicio: pila
+ *
+ * Facultad de Ingenieria, Universidad de Buenos Aires
+ * Algoritmos II 75.41
+ * */
+
 #include "pila.h"
 #include <stdlib.h>
 
@@ -8,6 +19,7 @@
 #define EXITOSO true
 #define ERROR_MALLOC NULL;
 #define ERROR_REDIMENSIONAR false
+
 /* Definición del struct pila proporcionado por la cátedra.
  */
 struct pila {
