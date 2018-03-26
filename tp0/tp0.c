@@ -1,7 +1,7 @@
 /*
  * Alumno: Leonel Rodrigo Rolon
  * Padron: 101009
- * fecha: 22-marzo-2018
+ * fecha: 26-marzo-2018
  * code: C
  * Ejercicio: swap, maximo, comparar, seleccion
  *
