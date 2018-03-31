@@ -14,9 +14,7 @@
 
 #define PILA_VACIA 0
 #define ARREGLO 10
-#define AGRANDAR_PILA 2
-#define ACHICAR_PILA 4
-#define EXITOSO true
+#define AGRANDAR_TAMANIO 2
 #define ERROR_MALLOC NULL;
 #define ERROR_REDIMENSIONAR false
 
@@ -61,41 +59,52 @@ bool pila_esta_vacia(const pila_t *pila){
   return pila->cantidad == PILA_VACIA;
 }
 
-bool redimencionar_pila(pila_t *t, tamanio){
-  int ARREGLO_AUMENTADO = tamanio * AGRANDAR_PILA * sizeof(void*);
-  void **datos_redimencionados = realloc(pila->datos, ARREGLO_AUMENTADO);
+bool redimensionar_pila(pila_t* pila, size_t tamanio){
+  void **datos_redimencionados = realloc(pila->datos, tamanio * sizeof(void *));
+
   if (!datos_redimencionados){
     return ERROR_REDIMENSIONAR;
   }
+
   pila->datos = datos_redimencionados;
-  pila->capacidad = ARREGLO_AUMENTADO;
-  return EXITOSO;
+  pila->capacidad = tamanio;
+  return true;
 }
 
 bool pila_apilar(pila_t *pila, void* valor){
-  if (pila->capacidad == pila->cantidad){
-    bool ok = redimencionar_pila(pila,AGRANDAR_PILA);
-    if (!ok){
+  bool aumentar_tamanio_ok = pila->capacidad == pila->cantidad;
+
+  if (aumentar_tamanio_ok){
+    bool redimencion = redimensionar_pila(pila,pila->capacidad * AGRANDAR_TAMANIO);
+
+    if (!redimencion){
       return ERROR_REDIMENSIONAR;
     }
   }
 
-  pila->datos[pila->cantidad++];
-  return EXITOSO;
+  pila->datos[pila->cantidad++] = valor;
+  return true;
 }
 
 void* pila_ver_tope(const pila_t *pila){
-  return pila_esta_vacia(pila) ? NULL : pila->datos[pila->cantidad-1];
+  return pila_esta_vacia(pila) ? NULL : pila->datos[pila->cantidad -1] ;
 }
 
 void* pila_desapilar(pila_t *pila){
-  bool condicion_redimencionar = pila->capacidad / 4 == pila->cantidad ;
-  if (!pila_esta_vacia(pila) && condicion_redimencionar){
-    bool ok = redimencionar_pila(pila,pila->capacidad / ACHICAR_PILA);
-    if (!ok){
+  if (pila_esta_vacia(pila)){
+    return NULL;
+  }
+
+  bool reducir_tamanio_ok = pila->cantidad * 4 <= pila->capacidad;
+
+  if (reducir_tamanio_ok ){
+    bool redimension = redimensionar_pila(pila,pila->capacidad / AGRANDAR_TAMANIO);
+
+    if (!redimension){
       return ERROR_REDIMENSIONAR;
     }
   }
+
   return pila->datos[--pila->cantidad] ;
 }
 
