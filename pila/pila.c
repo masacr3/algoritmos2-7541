@@ -75,9 +75,9 @@ bool pila_apilar(pila_t *pila, void* valor){
   bool aumentar_tamanio_ok = pila->capacidad == pila->cantidad;
 
   if (aumentar_tamanio_ok){
-    bool redimencion = redimensionar_pila(pila,pila->capacidad * AGRANDAR_TAMANIO);
+    bool ok = redimensionar_pila(pila,pila->capacidad * AGRANDAR_TAMANIO);
 
-    if (!redimencion){
+    if (!ok){
       return ERROR_REDIMENSIONAR;
     }
   }
@@ -98,9 +98,9 @@ void* pila_desapilar(pila_t *pila){
   bool reducir_tamanio_ok = pila->cantidad * 4 <= pila->capacidad;
 
   if (reducir_tamanio_ok ){
-    bool redimension = redimensionar_pila(pila,pila->capacidad / AGRANDAR_TAMANIO);
+    bool ok = redimensionar_pila(pila,pila->capacidad / AGRANDAR_TAMANIO);
 
-    if (!redimension){
+    if (!ok){
       return ERROR_REDIMENSIONAR;
     }
   }
