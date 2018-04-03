@@ -95,7 +95,7 @@ void* pila_desapilar(pila_t *pila){
     return NULL;
   }
 
-  bool reducir_tamanio_ok = pila->cantidad * 4 <= pila->capacidad;
+  bool reducir_tamanio_ok = (pila->cantidad * 4) <= pila->capacidad && (pila->capacidad / AGRANDAR_TAMANIO) >= ARREGLO ;
 
   if (reducir_tamanio_ok ){
     bool ok = redimensionar_pila(pila,pila->capacidad / AGRANDAR_TAMANIO);
