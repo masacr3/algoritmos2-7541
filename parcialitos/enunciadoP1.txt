@@ -1,0 +1,8 @@
+1. Implementar en C una función que dado un número, encuentre por División y Conquista la parte entera de su raíz cuadrada, en tiempo O(logn). 
+Demostrar, utilizando el Teorema Maestro, el orden de dicho algoritmo.
+Ejemplos:
+    - raiz(10) ---> 3
+    - raiz(11) ---> 3
+    - raiz(25) ---> 5
+
+2. Escribir una función en C que reciba una pila de enteros, y devuelva la suma de los valores sin utilizar ninguna estructura auxiliar. La pila debe quedar en el mismo estado en el que estaba originalmente. Indicar el orden del algoritmo.
