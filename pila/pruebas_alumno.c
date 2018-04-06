@@ -2,6 +2,7 @@
 #include "testing.h"
 #include <stddef.h>
 #include <stdio.h>
+#include <strings.h>
 
 
 /* ******************************************************************
@@ -26,7 +27,7 @@ void pruebas_pila_vacia(){
 }
 
 void pruebas_pila_apilar(){
-  printf("PRUEBAS APILAR\n");
+  printf("\n\nPRUEBAS APILAR\n");
   pila_t* pila = pila_crear();
   int array[] = {1,2,3};
   print_test("La pila esta creada", pila != NULL);
@@ -45,7 +46,7 @@ void pruebas_pila_apilar(){
 }
 
 void pruebas_pila_desapilar(){
-  printf("PRUEBAS DESAPILAR\n");
+  printf("\n\nPRUEBAS DESAPILAR\n");
   pila_t* pila = pila_crear();
   int array[] = {1,2,3};
   print_test("La pila esta creada", pila != NULL);
@@ -67,7 +68,7 @@ void pruebas_pila_desapilar(){
 }
 
 void prueba_pila_redimensionar(){
-  printf("PRUEBAS REDIMENSIONAR\n");
+  printf("\n\nPRUEBAS REDIMENSIONAR\n");
   pila_t* pila = pila_crear();
   int array[] = {1,2,3,4,5,6,7,8,9,10,11,12,13};
   print_test("La pila esta creada", pila != NULL);
@@ -84,10 +85,18 @@ void prueba_pila_redimensionar(){
   print_test("apilo 13", pila_apilar(pila,&array[12]));
   print_test("chequeo el tope tiene que ser 13", *(int*)pila_ver_tope(pila) == 13);
 
+  print_test("Empiezo a desapilar [1,2,3,4,5,6,7,8,9,10,11,12,13]",true);
+  for (int i=0; i<13 ; i++)
+  {
+    printf("desapilando %d",13-i);
+    print_test(" ",*(int*) pila_desapilar(pila) == array[12-i]);
+  }
+  print_test("La pila tiene que estar vacia", pila_esta_vacia(pila));
   pila_destruir(pila);
   print_test("pila destruida",true);
 
 }
+
 
 void pruebas_pila_alumno() {
   pruebas_pila_vacia();
