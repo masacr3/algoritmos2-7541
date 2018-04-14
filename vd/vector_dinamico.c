@@ -14,26 +14,6 @@
 
 // Funciones del alumno.
 
-
-//Funcion privada de vector_guardar
-//Pre: el vector fue creado
-//pos es una posicion valida del vector
-//Post: se almacenó el valor en la posición pos. Devuelve true
-bool _guardar_dato(vector_t* vector, size_t pos, int valor){
-  vector->datos[pos] = valor;
-  return true;
-}
-
-//Funcion privada de vector_obtener
-//Pre: el vector fue creado
-//pos es una posicion valida del vector
-//Post: se almacenó en valor el dato de la posición pos. Devuelve true
-bool _obtener_dato(vector_t* vector, size_t pos, int* valor){
-  *valor = vector->datos[pos];
-  return true;
-}
-
-
 size_t vector_obtener_tamanio(vector_t* vector){
   return vector->tam;
 }
@@ -44,11 +24,21 @@ void vector_destruir(vector_t* vector){
 }
 
 bool vector_guardar(vector_t* vector, size_t pos, int valor){
-  return pos >= vector->tam ? false : _guardar_dato(vector,pos,valor);
+  bool vector_fuera_rango = pos>= vector_obtener_tamanio(vector) || pos < 0;
+
+  if (vector_fuera_rango) return false;
+
+  vector->datos[pos] = valor;
+  return true;
 }
 
 bool vector_obtener(vector_t* vector, size_t pos, int* valor){
-  return pos >= vector->tam ? false : _obtener_dato(vector,pos,valor);
+  bool vector_fuera_rango = pos>= vector_obtener_tamanio(vector) || pos < 0;
+
+  if (vector_fuera_rango) return false;
+
+  *valor = vector->datos[pos];
+  return true;
 }
 // ...
 
@@ -57,9 +47,8 @@ bool vector_obtener(vector_t* vector, size_t pos, int* valor){
 vector_t* vector_crear(size_t tam) {
     vector_t* vector = malloc(sizeof(vector_t));
 
-    if (vector == NULL) {
-        return NULL;
-    }
+    if (vector == NULL) return NULL;
+
     vector->datos = malloc(tam * sizeof(int));
 
     if (tam > 0 && vector->datos == NULL) {
