@@ -11,11 +11,6 @@
 
 #include "tp0.h"
 
-#define LEN_MINIMO 1
-#define POSICION_INVALIDA -1
-#define VECTOR_MAYOR 1
-#define VECTOR_MENOR -1
-#define VECTORES_IGUALES 0
 /* ******************************************************************
  *                     FUNCIONES A COMPLETAR
  * *****************************************************************/
@@ -33,8 +28,8 @@ void swap (int* x, int* y) {
  */
 int maximo(int vector[], int n) {
 
-	if (n < LEN_MINIMO){
-		return POSICION_INVALIDA;
+	if (n < 1){
+		return -1;
 	}
 
 	int pos_valor_max = 0;
@@ -58,17 +53,15 @@ int comparar(int vector1[], int n1, int vector2[], int n2) {
 	for (int i = 0; i < n1 && i < n2 ; i++){
 
 		if (vector1[i] != vector2[i]) {
-			return vector1[i] < vector2[i] ? VECTOR_MENOR : VECTOR_MAYOR;
-
+			return vector1[i] < vector2[i] ? -1 : 1;
 		}
-
 	}
 
 	if (n1 != n2){
-		return n1 < n2 ? VECTOR_MENOR : VECTOR_MAYOR;
+		return n1 < n2 ? -1 : 1;
 	}
 
-	return VECTORES_IGUALES;
+	return 0;
 }
 
 /* selection_sort() ordena el arreglo recibido mediante el algoritmo de
@@ -78,7 +71,7 @@ void seleccion(int vector[], int n) {
 	for (int i = 0; i < n - 1 ; i++ ){
 
 		int pos_valor_max = maximo(vector,n - i);
-		swap (vector + pos_valor_max, vector + n - i - 1);
+		swap (&vector[pos_valor_max], &vector[n-1-i]);
 		}
 
 }

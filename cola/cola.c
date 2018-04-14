@@ -1,4 +1,4 @@
-#include 'cola.h'
+#include "cola.h"
 #include <stdlib.h>
 
 
@@ -13,7 +13,7 @@ struct nodo {
 struct cola {
   nodo_t* primero;
   nodo_t* ultimo;
-}
+};
 
 
 /* *****************************************************************
@@ -33,6 +33,7 @@ nodo_t* nodo_crear(void* dato){
 void nodo_destruir(nodo_t* nodo){
   free(nodo);
 }
+
 
 /* *****************************************************************
  *                    PRIMITIVAS DE LA COLA
@@ -57,8 +58,8 @@ void cola_destruir(cola_t *cola, void destruir_dato(void*)){
       destruir_dato(cola_desencolar(cola));
       continue;
     }
-
-    cola_desencolar(cola));
+    
+    cola_desencolar(cola);
   }
 
 free(cola);
@@ -93,10 +94,11 @@ void* cola_desencolar(cola_t *cola){
   if(cola_esta_vacia(cola)) return NULL;
 
   nodo_t* nodo = cola->primero;
-  void dato = nodo->dato;
-  nodo_destruir(nodo);
+  void* dato = nodo->dato;
 
   cola->primero = cola->primero->siguiente;
+
+  nodo_destruir(nodo);
 
   if (cola_esta_vacia(cola)) cola->ultimo = NULL;
 
