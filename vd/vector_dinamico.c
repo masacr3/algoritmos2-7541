@@ -24,7 +24,7 @@ void vector_destruir(vector_t* vector){
 }
 
 bool vector_guardar(vector_t* vector, size_t pos, int valor){
-  bool vector_fuera_rango = pos>= vector_obtener_tamanio(vector) || pos < 0;
+  bool vector_fuera_rango = pos>= vector->tam;
 
   if (vector_fuera_rango) return false;
 
@@ -33,7 +33,7 @@ bool vector_guardar(vector_t* vector, size_t pos, int valor){
 }
 
 bool vector_obtener(vector_t* vector, size_t pos, int* valor){
-  bool vector_fuera_rango = pos>= vector_obtener_tamanio(vector) || pos < 0;
+  bool vector_fuera_rango = pos>= vector->tam;
 
   if (vector_fuera_rango) return false;
 
