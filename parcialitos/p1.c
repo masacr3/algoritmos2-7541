@@ -1,3 +1,27 @@
+int raiz(int n){
+  return _raiz(n,1,n);
+}
+
+int _raiz(int n, int inicio, int fin){
+  /* division y conquista */
+  int medio = (inicio + fin)/2;
+
+  int cuadrado = medio *medio;
+  if (cuadrado == n){
+    return medio;
+  }
+
+  if (cuadrado > n){
+    return _raiz(n, )
+  }
+}
+
+
+
+
+
+
+
 int pila_sumar(pila_t* pila){
   //caso base
   if (pila_esta_vacia(pila)){

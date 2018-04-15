@@ -2,7 +2,7 @@ EXEC = pruebas
 CC = gcc
 CFLAGS = -g -std=c99 -Wall -Wconversion -Wno-sign-conversion -Werror
 VFLAGS = --leak-check=full --track-origins=yes --show-reachable=yes
-CFILES = main.c cola.c pruebas_alumno.c testing.c
+CFILES = main.c cola.c pruebas_alumno.c pila.c testing.c
 
 all:
 	$(CC) $(CFLAGS) $(CFILES) -o $(EXEC)
