@@ -95,10 +95,11 @@ void pruebas_cola_volumen_con_elementos_dinamicos(){
   for (int i =0 ; i <TAM ; i++){
       void* pila = (pila_t*) cola_desencolar(cola);
       desencolar_elementos_ok &= *(int*)pila_ver_tope(pila) == 2;
-      pila_destruir(pila);
+      destruir_pila(pila);
   }
 
   print_test("Se desencolaron todos los elementos correctamente",desencolar_elementos_ok);
+  print_test("se destruyeron todas las pilas",true);
   print_test("la cola esta vacia", cola_esta_vacia(cola));
   cola_destruir(cola,NULL);
   print_test("cola destruida",true);
@@ -141,6 +142,7 @@ void pruebas_cola_volumen_destruir_con_elementos_dinamicos(){
   print_test("Se encolaron todos los elementos correctamente",encolar_elementos_ok);
   print_test("la cola esta llena", !cola_esta_vacia(cola));
   cola_destruir(cola,destruir_pila);
+  print_test("se destruyeron los elementos dinamicos",true);
   print_test("cola destruida",true);
 }
 
@@ -155,16 +157,67 @@ void pruebas_cola_ver_primero(){
   bool encolo = true;
   for (int i = 0; i< 3; i++) encolo &= cola_encolar(cola,&array[i]);
 
-  print_test("encolo todos elementos",encolo);
+  print_test("encolo todos los elementos",encolo);
   print_test("ver primero tiene que ser 1",*(int*) cola_desencolar(cola) == 1);
   cola_destruir(cola,NULL);
   print_test("cola destruida",true);
 }
 
+void pruebas_cola_encolar_desencolar_sin_elementos_dinamicos(){
+  printf("\n\nPRUEBAS COLA ENCOLAR Y DESENCOLAR SIN ELEMENTOS DINAMICOS\n");
+
+  cola_t* cola = cola_crear();
+  print_test("La cola esta creada", cola != NULL);
+  print_test("La cola esta vacia", cola_esta_vacia(cola) );
+
+  int array[] = {1,2,3};
+  bool encolo = true;
+  for (int i = 0; i< 3; i++) encolo &= cola_encolar(cola,&array[i]);
+
+  print_test("encolo todos los elementos",encolo);
+
+  print_test("Desencolo 1", *(int*)cola_desencolar(cola)==array[0]);
+  print_test("Desencolo 2", *(int*)cola_desencolar(cola)==array[1]);
+  print_test("Desencolo 3", *(int*)cola_desencolar(cola)==array[2]);
+  print_test("La cola esta vacia", cola_esta_vacia(cola));
+  cola_destruir(cola,NULL);
+  print_test("cola destruida",true);
+}
+
+void pruebas_cola_encolar_desencolar_con_elementos_dinamicos(){
+  printf("\n\nPRUEBAS COLA ENCOLAR Y DESENCOLAR CON ELEMENTOS DINAMICOS\n");
+
+  cola_t* cola = cola_crear();
+  print_test("La cola esta creada", cola != NULL);
+  print_test("La cola esta vacia", cola_esta_vacia(cola) );
+
+  int array[] = {1,2};
+
+  bool encolo = true;
+  for (int i = 0; i< 3; i++) encolo &= cola_encolar(cola,crear_pila_cargada(array));
+
+  print_test("encolo todos los elementos",encolo);
+
+  void* pila = cola_desencolar(cola);
+  print_test("Desencolo pila con 2 elementos", *(int*)pila_ver_tope(pila)==2);
+  destruir_pila(pila);
+  pila = cola_desencolar(cola);
+  print_test("Desencolo pila con 2 elementos", *(int*)pila_ver_tope(pila)==2);
+  destruir_pila(pila);
+  pila = cola_desencolar(cola);
+  print_test("Desencolo pila con 2 elementos", *(int*)pila_ver_tope(pila)==2);
+  destruir_pila(pila);
+  print_test("se destruyeron todas pilas",true);
+  print_test("La cola esta vacia", cola_esta_vacia(cola));
+  cola_destruir(cola,NULL);
+  print_test("cola destruida",true);
+}
 
 void pruebas_cola_alumno() {
   pruebas_cola_vacia();
   pruebas_cola_ver_primero();
+  pruebas_cola_encolar_desencolar_sin_elementos_dinamicos();
+  pruebas_cola_encolar_desencolar_con_elementos_dinamicos();
   pruebas_cola_volumen_sin_elementos_dinamicos();
   pruebas_cola_volumen_con_elementos_dinamicos();
   pruebas_cola_volumen_destruir_sin_elementos_dinamicos();
