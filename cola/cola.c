@@ -30,10 +30,6 @@ nodo_t* nodo_crear(void* dato){
   return nodo;
 }
 
-void nodo_destruir(nodo_t* nodo){
-  free(nodo);
-}
-
 
 /* *****************************************************************
  *                    PRIMITIVAS DE LA COLA
@@ -53,13 +49,9 @@ cola_t* cola_crear(void){
 void cola_destruir(cola_t *cola, void destruir_dato(void*)){
 
   while(!cola_esta_vacia(cola)){
+    void* dato = cola_desencolar(cola);
 
-    if(destruir_dato){
-      destruir_dato(cola_desencolar(cola));
-      continue;
-    }
-    
-    cola_desencolar(cola);
+    if(destruir_dato) destruir_dato(dato);
   }
 
 free(cola);
@@ -74,14 +66,10 @@ bool cola_encolar(cola_t *cola, void* valor){
 
   if(!nodo) return NULL;
 
-  if(cola_esta_vacia(cola)){
-    cola->primero = nodo;
-    cola->ultimo = nodo;
-    return true;
-  }
+  if (cola_esta_vacia(cola)) cola->primero = nodo; else cola->ultimo->siguiente = nodo;
 
-  cola->ultimo->siguiente = nodo;
   cola->ultimo = nodo;
+
   return true;
 }
 
@@ -98,7 +86,7 @@ void* cola_desencolar(cola_t *cola){
 
   cola->primero = cola->primero->siguiente;
 
-  nodo_destruir(nodo);
+  free(nodo);
 
   if (cola_esta_vacia(cola)) cola->ultimo = NULL;
 
