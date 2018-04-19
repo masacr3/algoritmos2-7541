@@ -154,6 +154,15 @@ bool lista_iter_insertar(lista_iter_t *iter, void *dato){
 
   if(!nodo) return false;
 
-   
+  nodo->siguiente = iter->actual //siempre se acopla al actual
+  if(!iter->actual) iter->lista->ultimo = nodo;
+
+  if(!iter->anterior) iter->lista->primero = nodo; else iter->anterior->siguiente = nodo;
+
+  iter->actual = nodo;
+  iter->lista->cantidad ++; //actualizo cantidad
+
+  return true;
+
 }
 void *lista_iter_borrar(lista_iter_t *iter);
