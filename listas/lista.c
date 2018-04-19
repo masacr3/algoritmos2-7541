@@ -32,10 +32,6 @@ nodo_t* nodo_crear(void* valor){
   return nodo;
 }
 
-void nodo_destruir(nodo_t* nodo){
-  free(nodo);
-}
-
 /* Primitivas Lista */
 lista_t *lista_crear(void){
   lista_t* lista = malloc(sizeof(lista_t));
@@ -58,13 +54,7 @@ bool lista_insertar_primero(lista_t *lista, void *dato){
 
   if(!nodo) return false;
 
-  if(!lista->primero){
-    lista->primero = nodo;
-    lista->ultimo = nodo;
-    lista->cantidad++;
-
-    return true;
-  }
+  if(!lista->primero) lista->ultimo = nodo;
 
   nodo->siguiente = lista->primero;
   lista->primero = nodo;
@@ -78,20 +68,14 @@ bool lista_insertar_ultimo(lista_t *lista, void *dato){
 
   if(!nodo) return false;
 
-  if(!lista->primero){
-    lista->primero = nodo;
-    lista->ultimo = nodo;
-    lista->cantidad++;
+  if(!lista->primero) lista->primero = nodo; else lista->ultimo->siguiente = nodo;
 
-    return true;
-  }
-
-  lista->ultimo->siguiente = nodo;
   lista->ultimo = nodo;
   lista->cantidad++;
 
   return true;
 }
+
 void *lista_borrar_primero(lista_t *lista){
 
   if(!lista->primero) return NULL;
@@ -103,7 +87,7 @@ void *lista_borrar_primero(lista_t *lista){
 
   if(!lista->primero) lista->ultimo = NULL;
 
-  nodo_destruir(nodo);
+  free(nodo);
   lista->cantidad--;
 
   return dato;
@@ -161,6 +145,15 @@ bool lista_iter_al_final(const lista_iter_t *iter){
   return !iter->actual;
 }
 
-void lista_iter_destruir(lista_iter_t *iter);
-bool lista_iter_insertar(lista_iter_t *iter, void *dato);
+void lista_iter_destruir(lista_iter_t *iter){
+  free(iter);
+}
+
+bool lista_iter_insertar(lista_iter_t *iter, void *dato){
+  nodo_t* nodo = nodo_crear(dato);
+
+  if(!nodo) return false;
+
+   
+}
 void *lista_iter_borrar(lista_iter_t *iter);
