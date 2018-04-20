@@ -165,4 +165,28 @@ bool lista_iter_insertar(lista_iter_t *iter, void *dato){
   return true;
 
 }
-void *lista_iter_borrar(lista_iter_t *iter);
+
+void *lista_iter_borrar(lista_iter_t *iter){
+  if (!iter->actual) return NULL;
+
+  void* nodo = iter->actual;
+  void* dato = iter->actual->dato;
+
+  iter->actual = iter->actual->siguiente;
+
+  if(!iter->actual) iter->lista->ultimo = iter->anterior;
+
+  if(!iter->anterior) iter->lista->primero = iter->actual; else iter->anterior->siguiente = iter->actual;
+
+  free(nodo);
+  iter->lista->cantidad--;
+
+  return dato;
+
+}
+
+/* iterador interno */
+void lista_iterar(lista_t *lista, bool visitar(void *dato, void *extra), void *extra){
+  void* actual = lista->primero;
+  while(actual && visitar(actual->dato,extra)) actual = actual->siguiente; 
+}
