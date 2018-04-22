@@ -1,3 +1,6 @@
+#include "lista.h"
+#include <stdlib.h>
+
 typedef struct lista lista_t;
 typedef struct nodo nodo_t;
 typedef struct lista_iter lista_iter_t;
@@ -68,7 +71,8 @@ bool lista_insertar_ultimo(lista_t *lista, void *dato){
 
   if(!nodo) return false;
 
-  if(!lista->primero) lista->primero = nodo; else lista->ultimo->siguiente = nodo;
+  if(!lista->primero) lista->primero = nodo;
+  else lista->ultimo->siguiente = nodo;
 
   lista->ultimo = nodo;
   lista->cantidad++;
@@ -157,7 +161,8 @@ bool lista_iter_insertar(lista_iter_t *iter, void *dato){
   nodo->siguiente = iter->actual //siempre se acopla al actual
   if(!iter->actual) iter->lista->ultimo = nodo;
 
-  if(!iter->anterior) iter->lista->primero = nodo; else iter->anterior->siguiente = nodo;
+  if(!iter->anterior) iter->lista->primero = nodo;
+  else iter->anterior->siguiente = nodo;
 
   iter->actual = nodo;
   iter->lista->cantidad ++; //actualizo cantidad
@@ -176,7 +181,8 @@ void *lista_iter_borrar(lista_iter_t *iter){
 
   if(!iter->actual) iter->lista->ultimo = iter->anterior;
 
-  if(!iter->anterior) iter->lista->primero = iter->actual; else iter->anterior->siguiente = iter->actual;
+  if(!iter->anterior) iter->lista->primero = iter->actual;
+  else iter->anterior->siguiente = iter->actual;
 
   free(nodo);
   iter->lista->cantidad--;
@@ -188,5 +194,5 @@ void *lista_iter_borrar(lista_iter_t *iter){
 /* iterador interno */
 void lista_iterar(lista_t *lista, bool visitar(void *dato, void *extra), void *extra){
   void* actual = lista->primero;
-  while(actual && visitar(actual->dato,extra)) actual = actual->siguiente; 
+  while(actual && visitar(actual->dato,extra)) actual = actual->siguiente;
 }
