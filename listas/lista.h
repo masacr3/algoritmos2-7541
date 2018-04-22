@@ -104,4 +104,4 @@ void *lista_iter_borrar(lista_iter_t *iter);
 
 #endif // LISTA_ITER_H
 
-void pruebas_alumno();
+void pruebas_lista_alumno();
