@@ -70,19 +70,10 @@ void pruebas_lista_insertar_primero_con_elementos_dinamicos(){
   }
 
   for (int i=0; i<5; i++){
-    /*
-    int* numero = malloc(sizeof(int));
-    if(!numero){
-      free(array);
-      return;
-    }
-    *numero = i ;*
-    array[i] = numero;
-    */
     *array[i] = i;
   }
 
-  for (int i=0; i<5; i++) printf("%d -> %d \n",i+1,*(int*)array[i]);
+  //for (int i=0; i<5; i++) printf("%d -> %d \n",i+1,*(int*)array[i]);
   print_test("Se creo los datos dinamicos", array_ok);
 
   bool inserto_ok = true;
