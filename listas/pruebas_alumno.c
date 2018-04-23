@@ -356,14 +356,91 @@ void pruebas_iterador_insertar(){
     lista_iter_avanzar(iter2);
   }
 
-
-
   print_test("Se insertaron todos los datos correctamente",ok);
   lista_iter_destruir(iter);
   lista_iter_destruir(iter2);
   lista_destruir(lista,NULL);
   print_test("Se eliminaron la lista y el iterador",true);
 }
+
+void pruebas_iterador_borrar(){
+  printf("PRUEBAS ITERADOR BORRAR \n");
+
+  lista_t* lista = lista_crear();
+
+  bool ok = true;
+
+  ok &= lista != NULL && lista_esta_vacia(lista);
+
+  int lista_original[] = {1,2,3,4,5};
+  int lista_modificada[] = {2,3};
+
+  for(int i=0; i<5 ; i++) ok &= lista_insertar_ultimo(lista,&lista_original[i]);
+
+  print_test("La lista se creo",ok);
+
+  lista_iter_t* iter = lista_iter_crear(lista);
+  print_test("El iterador esta creado y apunta al principio de la lista", lista != NULL);
+  print_test("Elimino el dato de la posicion actual", *(int*)lista_iter_borrar(iter)==1);
+  print_test("Avanzar", lista_iter_avanzar(iter) && lista_iter_avanzar(iter));
+  print_test("Elimino el dato de la posicion actual", *(int*)lista_iter_borrar(iter)==4);
+  print_test("Elimino el dato de la posicion actual", *(int*)lista_iter_borrar(iter)==5);
+
+  lista_iter_t* iter2 = lista_iter_crear(lista);
+
+  int i = 0;
+  while(!lista_iter_al_final(iter2)) {
+    ok &= *(int*)lista_iter_ver_actual(iter2) == lista_modificada[i];
+    i++;
+    lista_iter_avanzar(iter2);
+  }
+  print_test("Se insertaron todos los datos correctamente",ok);
+  lista_iter_destruir(iter);
+  lista_iter_destruir(iter2);
+  lista_destruir(lista,NULL);
+  print_test("Se eliminaron la lista y el iterador",true);
+}
+
+void pruebas_iterador_volumen(){
+  printf("PRUEBAS ITERADOR VOLUMEN \n");
+
+  lista_t* lista = lista_crear();
+  int array[2000];
+  bool ok = true;
+
+  ok &= lista != NULL && lista_esta_vacia(lista);
+  print_test("Lista creada",ok);
+
+  lista_iter_t* iter = lista_iter_crear(lista);
+
+  print_test("El iterador esta creado y apunta al principio de la lista", lista != NULL);
+
+  for (int i=0; i<2000; i++ ){
+    array[i] = i;
+    ok &= lista_iter_insertar(iter,&array[i]) && *(int*)lista_iter_ver_actual(iter) == array[i];
+  }
+
+  print_test("Inserto todos los datos con exito",ok);
+
+  while (!lista_iter_al_final(iter)) ok &= lista_iter_avanzar(iter);
+
+  print_test("Recorrio exitosamente todos los elementos",ok);
+
+  lista_iter_t* iter2 = lista_iter_crear(lista);
+  print_test("Creo un segundo iterador para borrar todos los elementos",iter2 != NULL);
+
+  int i = 0;
+  while(!lista_iter_al_final(iter2)){
+    ok &= *(int*)lista_iter_borrar(iter2) == 2000 -1 - i;
+    i++;
+  }
+  print_test("Se borraron todos los elementos con exito",ok);
+  lista_iter_destruir(iter);
+  lista_iter_destruir(iter2);
+  lista_destruir(lista,NULL);
+  print_test("Se eliminaron la lista y el iterador",true);
+}
+
 
 void pruebas_lista_alumno() {
   pruebas_lista_vacia();
@@ -378,4 +455,6 @@ void pruebas_lista_alumno() {
   //iterador
   pruebas_iterador_lista_vacia();
   pruebas_iterador_insertar();
+  pruebas_iterador_borrar();
+  pruebas_iterador_volumen();
 }
