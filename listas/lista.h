@@ -63,6 +63,15 @@ size_t lista_largo(const lista_t *lista);
 // Post: se eliminaron todos los elementos de la lista.
 void lista_destruir(lista_t *lista, void destruir_dato(void *));
 
+/* Primitiva del iterador interno */
+// Esta estructura itera la lista y para cada elemento de la lista llama a
+// funcion visitar
+// Pre: La lista esta creada
+// Post: Modifica la lista original, si visitar devuelve false la lista se deja de iterar
+
+void lista_iterar(lista_t *lista, bool visitar(void *dato, void *extra), void *extra);
+
+
 #endif // LISTA_H
 
 #ifndef LISTA_ITER_H

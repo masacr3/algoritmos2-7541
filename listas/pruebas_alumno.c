@@ -441,6 +441,39 @@ void pruebas_iterador_volumen(){
   print_test("Se eliminaron la lista y el iterador",true);
 }
 
+bool sumar(void* dato, void* extra){
+  *(int*)extra += *(int*)dato;
+  return true;
+}
+
+
+void pruebas_iterador_interno(){
+  printf("PRUEBAS ITERADOR INTERNO \n");
+
+  lista_t* lista = lista_crear();
+  int array[2000];
+  int suma_resultado = 0;
+  bool ok = true;
+
+  ok &= lista != NULL && lista_esta_vacia(lista);
+  print_test("Lista creada",ok);
+
+  for (int i=0; i < 2000; i++){
+    array[i]=i;
+    ok &= lista_insertar_primero(lista,&array[i]);
+  }
+
+  print_test("Se insertaron todos los datos en la lista",ok);
+
+  lista_iterar(lista,sumar,&suma_resultado);
+
+  print_test("La suma es 1999000", suma_resultado == 1999000);
+
+  lista_destruir(lista,NULL);
+
+  print_test("Se elimino la lista",true);
+}
+
 
 void pruebas_lista_alumno() {
   pruebas_lista_vacia();
@@ -457,4 +490,6 @@ void pruebas_lista_alumno() {
   pruebas_iterador_insertar();
   pruebas_iterador_borrar();
   pruebas_iterador_volumen();
+  //iterador interno
+  pruebas_iterador_interno();
 }
