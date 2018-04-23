@@ -27,7 +27,7 @@ struct lista_iter{
 nodo_t* nodo_crear(void* valor){
   nodo_t* nodo = malloc(sizeof(nodo_t));
 
-  if(!nodo) return null;
+  if(!nodo) return NULL;
 
   nodo->dato = valor;
   nodo->siguiente = NULL;
@@ -87,7 +87,7 @@ void *lista_borrar_primero(lista_t *lista){
   void* nodo = lista->primero;
   void* dato = lista->primero->dato;
 
-  lista->primero = lista->primero-siguiente;
+  lista->primero = lista->primero->siguiente;
 
   if(!lista->primero) lista->ultimo = NULL;
 
@@ -112,7 +112,7 @@ size_t lista_largo(const lista_t *lista){
 void lista_destruir(lista_t *lista, void destruir_dato(void *)){
 
   while(!lista_esta_vacia(lista)){
-    void* dato = lista_borrar_primero(listo);
+    void* dato = lista_borrar_primero(lista);
 
     if(destruir_dato) destruir_dato(dato);
 
@@ -158,7 +158,7 @@ bool lista_iter_insertar(lista_iter_t *iter, void *dato){
 
   if(!nodo) return false;
 
-  nodo->siguiente = iter->actual //siempre se acopla al actual
+  nodo->siguiente = iter->actual;  //siempre se acopla al actual
   if(!iter->actual) iter->lista->ultimo = nodo;
 
   if(!iter->anterior) iter->lista->primero = nodo;
@@ -193,6 +193,6 @@ void *lista_iter_borrar(lista_iter_t *iter){
 
 /* iterador interno */
 void lista_iterar(lista_t *lista, bool visitar(void *dato, void *extra), void *extra){
-  void* actual = lista->primero;
+  nodo_t* actual = lista->primero;
   while(actual && visitar(actual->dato,extra)) actual = actual->siguiente;
 }
