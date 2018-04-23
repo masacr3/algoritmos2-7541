@@ -48,6 +48,9 @@ void pruebas_lista_insertar_primero_sin_elementos_dinamicos(){
 
 }
 
+void destruir_array(void* dato){
+
+}
 void pruebas_lista_insertar_primero_con_elementos_dinamicos(){
   printf("PRUEBAS LISTA INSERTAR PRIMERO CON ELEMENTOS DINAMICOS \n");
 
@@ -98,6 +101,7 @@ void pruebas_lista_insertar_primero_con_elementos_dinamicos(){
   print_test("Se borraron todos los elementos",borraron_ok);
   print_test("La lista tiene que estar vacia",lista_esta_vacia(lista));
   lista_destruir(lista,NULL);
+  free(array);
   print_test("lista destruida",true);
 
 }

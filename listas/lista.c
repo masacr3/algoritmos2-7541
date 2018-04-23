@@ -117,6 +117,7 @@ void lista_destruir(lista_t *lista, void destruir_dato(void *)){
     if(destruir_dato) destruir_dato(dato);
 
   }
+  free(lista);
 }
 
 /* Primitivas iterador */
