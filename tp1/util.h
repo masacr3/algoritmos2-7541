@@ -3,6 +3,7 @@
  */
 
 #include <stdlib.h>
+#include <string.h>
 
 char* slice(const char* str, size_t inicio, size_t fin);
 
@@ -14,4 +15,8 @@ char* slice(const char* str, size_t inicio, size_t fin);
  *   >   si no hay coincidencias posiciones[0] = 0
  *   >   si hay coincidencias posiciones[0] = coincidencias , len(posiciones) = coincidencias
  */
-int* buscar_sep(const char* str, char* sep);
+int* buscar_sep(const char* str, char sep);
+
+char** split(const char* str, char sep);
+
+void free_strv(char* strv[]);
