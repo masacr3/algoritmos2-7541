@@ -7,7 +7,7 @@
  *
  * Date: 26-abril-2018
  */
-#include "util.h"
+#include "strutil.h"
 #include <string.h>
 
 
