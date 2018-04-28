@@ -67,6 +67,8 @@ int* buscar_sep(const char* str, char sep){
  * Complexity : O(n)
  */
 char** split(const char* str, char sep){
+  if (sep == '\0') return NULL;
+  
   int* posiciones_sep = buscar_sep(str,sep);
   if (!posiciones_sep) return NULL;
 
