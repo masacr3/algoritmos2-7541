@@ -57,9 +57,9 @@ int main(int argc, char* argv[]){
 
 
     while ( read > EOF){
-      fprintf(stderr, "Diferencia linea %d\n<%s-------\n>%s\n",posicicion,read_f1 == EOF ? " \n" : linea , read_f1 == EOF ? linea : " \n"  );
+      fprintf(stderr, "Diferencia linea %d\n<%s-------\n>%s\n",posicicion,read_f1 > EOF ? linea :" \n" , read_f2 > EOF ? linea : " \n"  );
       posicicion++;
-      read = getline(&linea,&capacidad, read_f1 == EOF ? f2 : f1 );
+      read = getline(&linea,&capacidad, read_f1 > EOF ? f1 : f2);
     }
 
     free(linea);
