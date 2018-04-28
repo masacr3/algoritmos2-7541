@@ -9,7 +9,7 @@ all:
 
 run: all
 	cat t1.txt
-	./$(EXEC) t1.txt t2.txt
+	./$(EXEC) t1.txt t3.txt
 
 valgrind: all
-	valgrind $(VFLAGS) ./$(EXEC)
+	valgrind $(VFLAGS) ./$(EXEC) t1.txt t3.txt

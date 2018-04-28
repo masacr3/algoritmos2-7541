@@ -14,8 +14,6 @@ int main(int argc, char* argv[]){
   FILE* f1;
   FILE* f2;
 
-  f2 = fopen(argv[2],"r");
-
   if((f1 = fopen(argv[1],"r")) == NULL){
     fprintf(stderr, "%s\n","Archivo erroneo");
 
