@@ -1,8 +1,8 @@
-EXEC = pruebas_sp
+EXEC = tail
 CC = gcc
 CFLAGS = -g -std=c99 -Wall -Wtype-limits -pedantic -Wconversion -Wno-sign-conversion
 VFLAGS = --leak-check=full --track-origins=yes --show-reachable=yes
-CFILES =  strutil.c pruebas.c
+CFILES =  tail.c cola.c
 
 all:
 	$(CC) $(CFLAGS) $(CFILES) -o $(EXEC)
@@ -12,3 +12,6 @@ run: all
 
 valgrind: all
 	valgrind $(VFLAGS) ./$(EXEC)
+
+tail: all
+	./$(EXEC) 4 < t1.txt
