@@ -23,6 +23,7 @@ char** split(const char* str, char sep);
  */
 char* join(char** strv, char sep);
 
+
 /*
  * Libera un arreglo dinámico de cadenas, y todas las cadenas que contiene.
  */
