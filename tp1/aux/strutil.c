@@ -98,30 +98,24 @@ char** split(const char* str, char sep){
 
 }
 
-
 int* obtener_len_strv(char** strv){
 
-  size_t tam = 0;
-  for(int i=0; strv[i]; i++ ) tam++;
-
-  int* array = malloc(sizeof(int) * (2 + tam) );
+  int* array = malloc(sizeof(int) * 2);
   if(!array) return NULL;
 
   int suma = 0;
   int filas = 0;
 
   for (int i=0; strv[i]; i++ ){
-    int len = (int)strlen(strv[i]);
-    array[2 + i] = len;
     filas ++;
-    suma += len;
-
+    suma += (int)strlen(strv[i]);
   }
   array[0] = filas;
   array[1] = suma;
 
   return array;
 }
+
 
 char* join(char** strv, char sep){
   if(sep=='\0' || !strv) return NULL;
@@ -147,16 +141,15 @@ char* join(char** strv, char sep){
     return _join;
   }
 
-  size_t pibote = array[2]; // strlen(strv[0])
+  size_t pibote = strlen(strv[0]);
 
   memcpy(_join,strv[0],pibote);
   _join[pibote] = '\0';
 
   for (int i=1; i<filas; i++){
     _join[pibote] = sep;
-    size_t copiar = (size_t)array[2 + i]+1;
-    memcpy(&_join[pibote+1],strv[i],copiar);
-    pibote += copiar;
+    memcpy(&_join[pibote+1],strv[i],strlen(strv[i])+1);
+    pibote = strlen(_join);
   }
   free(array);
   return _join;
