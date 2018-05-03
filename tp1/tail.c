@@ -8,12 +8,14 @@ int main(int argc, char* argv[]){
 
   size_t imprimir = argc == 1 ? 0 : atoi(argv[1]);
 
-  if(argc == 1){
+  if(argc != 2){
     fprintf(stderr, "%s\n", "Cantidad de parametros erronea" );
     return 0;
   }
+  
+  size_t imprimir = (size_t)atoi(argv[1]);
 
-  if (imprimir<1){
+  if (imprimir == 0){
     fprintf(stderr, "%s\n", "Tipo de parametro incorrecto" );
     return 0;
   }
