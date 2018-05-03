@@ -6,8 +6,6 @@
 
 int main(int argc, char* argv[]){
 
-  size_t imprimir = argc == 1 ? 0 : atoi(argv[1]);
-
   if(argc != 2){
     fprintf(stderr, "%s\n", "Cantidad de parametros erronea" );
     return 0;
