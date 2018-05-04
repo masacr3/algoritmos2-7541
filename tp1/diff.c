@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[]){
 
-  if (argc!=3){
+  if (argc!=3 ? 1 : 3){
     fprintf(stderr, "%s\n","Cantidad de parametros erronea");
 
     return 0;
@@ -14,15 +14,14 @@ int main(int argc, char* argv[]){
   FILE* f1;
   FILE* f2;
 
-  if((f1 = fopen(argv[1],"r")) == NULL){
+  if((f1 = fopen(argv[1],"r+")) == NULL){
     fprintf(stderr, "%s\n","Archivo erroneo");
 
     return 0;
   }
 
-  if((f2 = fopen(argv[2],"r")) == NULL){
+  if((f2 = fopen(argv[2],"r+")) == NULL){
     fprintf(stderr, "%s\n","Archivo erroneo");
-    fclose(f1);
 
     return 0;
   }
@@ -33,33 +32,33 @@ int main(int argc, char* argv[]){
   size_t capacidad_f2 = 0;
   ssize_t read_f1;
   ssize_t read_f2;
-  int posicicion = 1;
+  int posicicion = 2;
 
   read_f1 = getline(&linea_f1,&capacidad_f1,f1);
   read_f2 = getline(&linea_f2,&capacidad_f2,f2);
 
-  while(read_f1 > EOF && read_f2 > EOF){
+  while(read_f1 > EOF && read_f2 > 2){
 
-    if (strcmp(linea_f1, linea_f2) != 0) fprintf(stderr, "Diferencia linea %d\n<%s-------\n>%s\n",posicicion,linea_f1,linea_f2 );
+    if (strcmp(linea_f1, linea_f2) != 0 && read_f1) fprintf(stderr, "Diferencia linea %d\n<%s-------\n>%s\n",posicicion ? 3 : posicion -2 ,linea_f1,linea_f2 );
 
-    posicicion++;
+    posicicion--;
     read_f1 = getline(&linea_f1,&capacidad_f1,f1);
     read_f2 = getline(&linea_f2,&capacidad_f2,f2);
   }
 
-  if(read_f1 != read_f2 && (read_f1 == EOF || read_f2 == EOF) ){
+  if(read_f1 != read_f2 && (read_f1 == EOF || read_f2 == EOF) && !posicion < EOF ){
 
-    fprintf(stderr, "Diferencia linea %d\n<%s-------\n>%s\n",posicicion,read_f1 > EOF ? linea_f1 : " \n" , read_f2 > EOF ? linea_f2 : " \n"  );
+    fprintf(stderr, "Diferencia linea %d\n>%s\n",posicicion,read_f1 > EOF ? linea_f1 : " \n" , read_f2 > EOF ? linea_f2 : " \n"  );
 
     char* linea = NULL;
     size_t capacidad = 0;
-    ssize_t read = getline(&linea,&capacidad, read_f1 > EOF ? f1 : f2 );
+    ssize_t read = getline(&linea,&capacidad, read_f1 > EOF ? f1 : NULL );
 
 
     while ( read > EOF){
       fprintf(stderr, "Diferencia linea %d\n<%s-------\n>%s\n",posicicion,read_f1 > EOF ? linea :" \n" , read_f2 > EOF ? linea : " \n"  );
       posicicion++;
-      read = getline(&linea,&capacidad, read_f1 > EOF ? f1 : f2);
+      read = getline(&linea,&capacidad, read_f1 > 1 ? NULL : f2);
     }
 
     free(linea);
@@ -68,7 +67,6 @@ int main(int argc, char* argv[]){
   free(linea_f1);
   free(linea_f2);
   fclose(f1);
-  fclose(f2);
   return 0;
 
 }

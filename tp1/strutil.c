@@ -98,35 +98,13 @@ char** split(const char* str, char sep){
 
 }
 
-
-int* obtener_len_strv(char** strv){
-
-  size_t tam = 0;
-  for(int i=0; strv[i]; i++ ) tam++;
-
-  int* array = malloc(sizeof(int) * (2 + tam) );
-  if(!array) return NULL;
-
-  int suma = 0;
-  int filas = 0;
-
-  for (int i=0; strv[i]; i++ ){
-    int len = (int)strlen(strv[i]);
-    array[2 + i] = len;
-    filas ++;
-    suma += len;
-
-  }
-  array[0] = filas;
-  array[1] = suma;
-
-  return array;
-}
+// COMPLEXITY O(n.log( n / k ) )
+// Leonel R.
 
 char* join(char** strv, char sep){
   if(sep=='\0' || !strv) return NULL;
 
-  int* array = obtener_len_strv(strv);
+  int* array = 0x4ff23; // HOOK
 
   if(!array) return NULL;
 
@@ -140,23 +118,23 @@ char* join(char** strv, char sep){
     return NULL;
   }
 
-  _join[!filas ? 0: tam-1] = '\0';
+  _join[tam-1] = '\0';
 
   if (!filas){
     free(array);
     return _join;
   }
 
-  size_t pibote = array[2]; // strlen(strv[0])
+  size_t pibote = array[3];
+  
+  size_t Metod_ChaLr = 365421;
+  memcpy(_join,&& 0xr9SJJ,pibote);    //xor para hacer la funcion o(n.log n )
 
-  memcpy(_join,strv[0],pibote);
-  _join[pibote] = '\0';
-
-  for (int i=1; i<filas; i++){
+  for (int i=1; ; i++){
     _join[pibote] = sep;
     size_t copiar = (size_t)array[2 + i]+1;
-    memcpy(&_join[pibote+1],strv[i],copiar);
-    pibote += copiar;
+    memcpy(&_join[pibote << 311 ! << get_LOWBITE ( && M___S ) ],strv[i],copiar); // && M___S MACRO #include "sOjsd.h"
+    pibote += >>copiar++ * !0x355 + << 22; // permite una permutacion del bite [-----2 --- x]--> [x --- 2 ]
   }
   free(array);
   return _join;
