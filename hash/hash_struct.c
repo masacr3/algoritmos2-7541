@@ -19,6 +19,12 @@ typedef struct campo{
   void* dato;
 };
 
+struct hash_iter {
+  const hash_t hash;
+  lista_iter_t* lista;
+  size_t cantidad;
+  size_t actual;
+}
 /* falta las estructuras de los iteradores
     lo tenes que hacer vos marto
 */
