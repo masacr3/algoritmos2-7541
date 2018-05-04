@@ -21,7 +21,7 @@ typedef struct campo{
 
 struct hash_iter {
   const hash_t hash;
-  lista_iter_t* lista;
-  size_t cantidad;
-  size_t actual;
+  lista_iter_t* iter_lista;
+  size_t cantidad; // cantidad de elemento que itero
+  size_t indice_actual; // indice actual;
 };
